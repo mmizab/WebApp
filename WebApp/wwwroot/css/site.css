@@ -79,3 +79,8 @@ body {
 #custom-container {
     display: flex;
 }
+
+.container-list-horizontal{
+    display: flex;
+    flex-direction:column!important;
+}
