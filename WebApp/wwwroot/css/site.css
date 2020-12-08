@@ -97,6 +97,7 @@ header {
     margin-top: 6px;
 }
 
+<<<<<<< HEAD
 /* Caja general - dentro todas las cajas de las tiendas */
 #box-general {
     display: flex;
@@ -133,3 +134,9 @@ header {
     width: 100%;
     height: 35%;
 }
+=======
+.container-list-horizontal{
+    display: flex;
+    flex-direction:column!important;
+}
+>>>>>>> 95fa0f41ef8fa1952736825f15e6ae2f4bfe5ee2
