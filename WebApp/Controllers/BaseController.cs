@@ -10,7 +10,7 @@ namespace WebApp.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly WebAppContext _context;
+        public readonly WebAppContext _context;
         public BaseController(WebAppContext webappcontext)
         {
             this._context = webappcontext;

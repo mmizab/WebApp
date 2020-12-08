@@ -5,19 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApp.Data;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public HomeController()
+        public HomeController(WebAppContext webappcontext):base(webappcontext)
         {
         }
 
+        public List<Post> GetPosts() {
+            return _context.Post.ToList();
+        }
         public IActionResult Index()
         {
-            return View();
+            List<Post> posts = GetPosts();
+            return View(posts);
         }
 
         public IActionResult Privacy()
