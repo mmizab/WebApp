@@ -7,41 +7,148 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
+
 <body>
-    <div id="custom-container">
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                        </ul>
+    <div class="container">
+        <main role="main" class="pb-3">
+                @RenderBody()
+        </main>
+    </div>
+        <div id="custom-container">
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <div class="container container-list-horizontal">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Categoria</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <ul class="navbar-nav flex-grow-1 container-list-horizontal">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- ##### BOX DELS PRODUCTES DE CATEGORIA O NO CATEGORIA ##### -->
+            <div id="box-general">
+                <div class="data-row-items">
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.1</p>
+                            Aquí anirà una imatge de la tenda o categoria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o categoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.2</p>
+                            Aquí anirà una imatge de la tenda o categoria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o categoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.3</p>
+                            Aquí anirà una imatge de la tenda o categoria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o categoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.4</p>
+                            Aquí anirà una imatge de la tenda o categoria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.5</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.6</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.7</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.8</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.9</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.10</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
+                    </div>
+                    <div class="box-product-categoria">
+                        <div class="box-product-image">
+                            <p>BOX.11</p>
+                            Aquí anirà una imatge de la tenda o categria.!
+                        </div>
+                        <div class="description-box">
+                            <a style="color: green;"> Aquí va la descripció de la tenda o catefgoria.</a>
+                        </div>
                     </div>
                 </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-        </footer>
-    </div>
+
+
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2020 - WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>
+        </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

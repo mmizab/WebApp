@@ -20,7 +20,6 @@ namespace WebApp.Controllers
         {
             _context.Add(o);
             _context.SaveChanges();
-            _logger.LogInformation(o.ToString());
             return o;
         }
 

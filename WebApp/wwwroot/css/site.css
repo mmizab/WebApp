@@ -1,21 +1,22 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+
+a .navbar-brand {
   white-space: normal;
   text-align: center;
-  word-break: break-all;
+  display: flex;
+  font-size: 18px;
 }
-
 /* Provide sufficient contrast against white background */
-a {
+a{
   color: #0366d6;
 }
 
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
-  border-color: #1861ac;
+  border-color: #1861ac
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -74,8 +75,61 @@ body {
 }
 
 
-
 /* Custom */
 #custom-container {
     display: flex;
+    background-color: blue;
+}
+
+/* llista esquerre vertical*/
+.container-list-horizontal{
+    display: flex;
+    flex-direction:column!important;
+  
+}
+
+.pb-3{
+    background-color: red;
+}
+
+header {
+    width: 15%;
+    margin-top: 6px;
+}
+
+/* Caja general - dentro todas las cajas de las tiendas */
+#box-general {
+    display: flex;
+}
+.data-row-items {
+    display: flex;
+    background-color: green;
+    width: 100%;
+    margin: 6px;
+    margin-left: 0;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.box-product-categoria {
+    font-size: 20px;
+    border: 2px;
+    border-style: solid;
+    margin: 14px;
+    height: 390px;
+    background-color: black;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+}
+.box-product-image {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.description-box {
+    display: flex;
+    margin-top: 60%;
+    background-color: yellow;
+    width: 100%;
+    height: 35%;
 }
