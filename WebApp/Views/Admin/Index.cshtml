@@ -1,0 +1,19 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form asp-action="CreatePostRazor">
+    <div>
+        <label>Title</label>
+        <input type="text" asp-for="@Model.Title" />
+    </div>
+    <div>
+        <label>Content</label>
+        <input type="text" asp-for="@Model.Content" value="" />
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
