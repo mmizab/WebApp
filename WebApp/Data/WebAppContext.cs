@@ -15,5 +15,6 @@ namespace WebApp.Data
         }
 
         public DbSet<Post> Post { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
