@@ -1,4 +1,4 @@
-﻿@model Post
+﻿@model PostDto
 @{
     ViewData["Title"] = "Index";
     Layout = "_Admin";
@@ -6,6 +6,7 @@
 
 <h1>Index</h1>
 <form asp-action="CreatePostRazor">
+    <input type="hidden" asp-for="@Model.StoreId"/>
     <div>
         <label>Title</label>
         <input type="text" asp-for="@Model.Title" />

@@ -44,7 +44,7 @@ namespace WebApp.Controllers
             //Create the identity for the user
             ClaimsIdentity identity = null;
             identity = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Name, userName)
+                    new Claim("Name", userName)
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
 

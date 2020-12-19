@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApp.Data;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -23,6 +24,20 @@ namespace WebApp.Controllers
             _context.Add(o);
             _context.SaveChanges();
             return o;
+        }
+
+        public User GetUser() {
+            string username = User.Claims.FirstOrDefault(o => o.Type == "Name").Value;
+            if (username != null)
+            {
+                throw new Exception("Error getting user information");
+            }
+            User user = _context.User.FirstOrDefault(o => o.Email == username);
+            if (user == null)
+            {
+                throw new Exception("Error getting user from database");
+            }
+            return user;
         }
 
     }
