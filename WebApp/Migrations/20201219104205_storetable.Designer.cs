@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Data;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20201219104205_storetable")]
+    partial class storetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,15 +31,10 @@ namespace WebApp.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("StoreId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StoreId");
 
                     b.ToTable("Post");
                 });
@@ -85,13 +82,6 @@ namespace WebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("WebApp.Models.Post", b =>
-                {
-                    b.HasOne("WebApp.Models.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId");
                 });
 
             modelBuilder.Entity("WebApp.Models.Store", b =>

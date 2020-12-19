@@ -34,11 +34,22 @@ namespace WebApp.Data
             context.SaveChanges();
 
             // load test user to create test store 
+            Store store = null;
             User test = users.FirstOrDefault(o => o.Email == "test@test.com");
             if ( test != null && test.Id != 0)
             {
-                Store store = new Store { Name = "test store", User = test };
+                store = new Store { Name = "test store", User = test };
                 context.Add(store);
+                context.SaveChanges();
+            }
+
+            if (store != null && store.Id != 0) {
+                List<Post> posts = new List<Post>();
+                posts.Add(new Post { Store = store, Title = "First post", CreateDate = DateTime.Now, Content = "First post content"});
+                posts.Add(new Post { Store = store, Title = "Second post", CreateDate = DateTime.Now, Content = "Second post content"});
+                posts.Add(new Post { Store = store, Title = "Third post", CreateDate = DateTime.Now, Content = "Third post content"});
+
+                context.AddRange(posts);
                 context.SaveChanges();
             }
             

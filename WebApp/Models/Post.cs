@@ -13,5 +13,6 @@ namespace WebApp.Models
         public string Content { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime CreateDate { get; set; }
+        public Store Store { get; set; }
     }
 }
