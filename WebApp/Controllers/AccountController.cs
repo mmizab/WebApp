@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebApp.Data;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController(WebAppContext context) : base(context)
+        private readonly ILogger _logger;
+        public AccountController(WebAppContext context, ILogger<AccountController> logger) : base(context, logger)
         {
-
+            _logger = logger;
         }
         public IActionResult Login()
         {
@@ -24,12 +27,15 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAsync(string userName, string password)
         {
+            User user = null;
+
             if (!string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(password))
             {
-                return RedirectToAction("Login");
+                return RedirectToAction(nameof(Login));
             }
 
-            var user = _context.User.FirstOrDefault(o => o.Email == userName && o.Password == password);
+            user = _context.User.FirstOrDefault(o => o.Email == userName && o.Password == password);
+
             if (user == null)
             {
                 return View();
@@ -53,7 +59,7 @@ namespace WebApp.Controllers
         public IActionResult Logout()
         {
             var login = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login");
+            return RedirectToAction(nameof(Login));
         }
     }
 }

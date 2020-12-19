@@ -11,9 +11,11 @@ namespace WebApp.Controllers
     public class BaseController : Controller
     {
         public readonly WebAppContext _context;
-        public BaseController(WebAppContext webappcontext)
+        private readonly ILogger _logger;
+        public BaseController(WebAppContext webappcontext, ILogger<BaseController> logger)
         {
-            this._context = webappcontext;
+            _context = webappcontext;
+            _logger = logger;
         }
 
         public Object Save(Object o)

@@ -16,18 +16,34 @@ namespace WebApp.Data
                 serviceProvider.GetRequiredService<
                     DbContextOptions<WebAppContext>>()))
             {
-                // Look for any movies.
-                if (context.User.Any())
-                {
-                    return;   // DB has been seeded
-                }
-
-                context.User.AddRange(
-                    new User { Email="admin", Password="1"},
-                    new User { Email="test@test.com", Password="1"}
-                    );
-                context.SaveChanges();
+                SeedData.Populate(context);
             }
         }
+
+        public static void Populate(WebAppContext context) {
+            if (context.User.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            List<User> users = new List<User>();
+            users.Add(new User { Email = "admin", Password = "1" });
+            users.Add(new User { Email = "test@test.com", Password = "1" });
+
+            context.AddRange(users);
+            context.SaveChanges();
+
+            // load test user to create test store 
+            User test = users.FirstOrDefault(o => o.Email == "test@test.com");
+            if ( test != null && test.Id != 0)
+            {
+                Store store = new Store { Name = "test store", User = test };
+                context.Add(store);
+                context.SaveChanges();
+            }
+            
+        }
+
+
     }
 }

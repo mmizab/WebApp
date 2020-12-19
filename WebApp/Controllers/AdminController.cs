@@ -13,7 +13,7 @@ namespace WebApp.Controllers
     [Authorize]
     public class AdminController : BaseController
     {
-        public AdminController(WebAppContext webappcontext):base(webappcontext)
+        public AdminController(WebAppContext webappcontext, ILogger<AdminController> logger):base(webappcontext,logger)
         {
 
         }

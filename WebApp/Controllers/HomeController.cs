@@ -12,12 +12,16 @@ namespace WebApp.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(WebAppContext webappcontext):base(webappcontext)
+        private readonly ILogger _logger;
+        public HomeController(WebAppContext webappcontext, ILogger<HomeController> logger) : base(webappcontext, logger)
         {
+            _logger = logger;
         }
 
-        public List<Post> GetPosts() {
-            return _context.Post.ToList();
+        public List<Post> GetPosts()
+        {
+            List<Post> posts = _context.Post.ToList();
+            return posts;
         }
         public IActionResult Index()
         {
