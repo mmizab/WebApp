@@ -14,5 +14,6 @@ namespace WebApp.Models
         [DataType(DataType.DateTime)]
         public DateTime CreateDate { get; set; }
         public Store Store { get; set; }
+        public Category Category { get; set; }
     }
 }

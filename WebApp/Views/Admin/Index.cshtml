@@ -1,12 +1,17 @@
-﻿@model PostDto
+﻿@model AdminPostDto
 @{
     ViewData["Title"] = "Index";
     Layout = "_Admin";
 }
 
 <h1>Index</h1>
-<form asp-action="CreatePostRazor">
-    <input type="hidden" asp-for="@Model.StoreId"/>
+<form asp-action="CreatePost">
+    <div>
+        <label>Store Id:</label>
+        <select asp-for="@Model.StoreId" asp-items="@(new SelectList(Model.StoreDto,"Id", "Name"))">
+            <option value="">Pick option</option>
+        </select>
+    </div>
     <div>
         <label>Title</label>
         <input type="text" asp-for="@Model.Title" />
@@ -14,6 +19,12 @@
     <div>
         <label>Content</label>
         <input type="text" asp-for="@Model.Content" value="" />
+    </div>
+    <div>
+        <label>Category:</label>
+        <select asp-for="@Model.CategoryId" asp-items="@(new SelectList(Model.CategoryDto,"Id", "Name"))">
+            <option value="">Pick option</option>
+        </select>
     </div>
     <div>
         <input type="submit" value="Save" />

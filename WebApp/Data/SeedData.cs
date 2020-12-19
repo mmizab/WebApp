@@ -27,8 +27,8 @@ namespace WebApp.Data
             }
 
             List<User> users = new List<User>();
-            users.Add(new User { Email = "admin", Password = "1" });
-            users.Add(new User { Email = "test@test.com", Password = "1" });
+            users.Add(new User { Email = "admin", Password = "1" , Role = "admin"});
+            users.Add(new User { Email = "test@test.com", Password = "1", Role = "client"});
 
             context.AddRange(users);
             context.SaveChanges();
@@ -43,11 +43,22 @@ namespace WebApp.Data
                 context.SaveChanges();
             }
 
+
+            List<Category> category = new List<Category>
+            {
+                new Category { Name = "test" }
+            };
+            context.AddRange(category);
+            context.SaveChanges();
+
+
             if (store != null && store.Id != 0) {
-                List<Post> posts = new List<Post>();
-                posts.Add(new Post { Store = store, Title = "First post", CreateDate = DateTime.Now, Content = "First post content"});
-                posts.Add(new Post { Store = store, Title = "Second post", CreateDate = DateTime.Now, Content = "Second post content"});
-                posts.Add(new Post { Store = store, Title = "Third post", CreateDate = DateTime.Now, Content = "Third post content"});
+                List<Post> posts = new List<Post>
+                {
+                    new Post { Store = store, Title = "First post", CreateDate = DateTime.Now, Content = "First post content"},
+                    new Post { Store = store, Title = "Second post", CreateDate = DateTime.Now, Content = "Second post content" },
+                    new Post { Store = store, Title = "Third post", CreateDate = DateTime.Now, Content = "Third post content" }
+                };
 
                 context.AddRange(posts);
                 context.SaveChanges();
