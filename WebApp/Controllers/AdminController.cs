@@ -20,29 +20,15 @@ namespace WebApp.Controllers
         }
         public IActionResult Index()
         {
-            User user = GetUser();
-            List<Store> stores = new List<Store>();
+            List<Store> stores = GetStores();
+            List<Category> categorys = _context.Category.ToList();
             List<StoreDto> storesdtos = new List<StoreDto>();
             List<CategoryDto> categorydtos = new List<CategoryDto>();
-
-            if (user.Role == "admin")
-            {
-                stores = _context.Store.ToList();
-            }
-            else
-            {
-                stores = _context.Store.Where(o => o.User.Id == user.Id).ToList();
-            }
-            if (stores == null || stores.Count == 0)
-            {
-                throw new Exception("Error getting store information");
-            }
 
             foreach (var item in stores)
             {
                 storesdtos.Add(StoreToDto(item));
             }
-            List<Category> categorys = _context.Category.ToList();
             foreach (var item in categorys)
             {
                 categorydtos.Add(CategoryToDto(item));

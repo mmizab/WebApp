@@ -61,6 +61,25 @@ namespace WebApp.Controllers
             return dto;
         }
 
+        public List<Store> GetStores() {
+
+            User user = GetUser();
+
+            List<Store> stores = null;
+            if (user.Role == "admin")
+            {
+                stores = _context.Store.ToList();
+            }
+            else
+            {
+                stores = _context.Store.Where(o => o.User.Id == user.Id).ToList();
+            }
+            if (stores == null || stores.Count == 0)
+            {
+                throw new Exception("Error getting store information");
+            }
+            return stores;
+        }
         public Store GetStore(int storeId)
         {
             User user = GetUser();
