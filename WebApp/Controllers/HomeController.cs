@@ -9,41 +9,26 @@ using WebApp.Data;
 using WebApp.DTO;
 using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
+using WebApp.Service;
 
 namespace WebApp.Controllers
 {
     public class HomeController : BaseController
     {
         private readonly ILogger _logger;
+        private CategoryService CategoryService { get; set; }
         public HomeController(WebAppContext webappcontext, ILogger<HomeController> logger) : base(webappcontext, logger)
         {
             _logger = logger;
+            CategoryService = new CategoryService(webappcontext);
         }
 
-        public List<PostDto> GetPosts()
-        {
-            List<Post> posts = _context.Post.Include( o => o.Category).ToList();
-            List<PostDto> dtos = new List<PostDto>();
-            foreach (var item in posts)
-            {
-                dtos.Add(PostToDto(item));
-            }
-            return dtos;
-        }
 
-        public List<CategoryDto> GetCategories() {
 
-            List<Category> categories = _context.Category.ToList();
-            List<CategoryDto> dtos = new List<CategoryDto>();
-            foreach (var item in categories)
-            {
-                dtos.Add(CategoryToDto(item));
-            }
-            return dtos;
-        }
+
         public IActionResult Index()
         {
-            List<CategoryDto> categories = GetCategories();
+            List<CategoryDto> categories = CategoryService.GetCategoriesDto();
             List<PostDto> posts = GetPosts();
 
             HomeDto homeview = new HomeDto { CategoryDto = categories, PostDto = posts};

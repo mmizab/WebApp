@@ -12,11 +12,11 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
         private readonly ILogger _logger;
-        public AccountController(WebAppContext context, ILogger<AccountController> logger) : base(context, logger)
-        {
+        private WebAppContext Context;
+        public AccountController(WebAppContext context, ILogger<AccountController> logger)        {
             _logger = logger;
         }
         public IActionResult Login()
@@ -34,7 +34,7 @@ namespace WebApp.Controllers
                 return RedirectToAction(nameof(Login));
             }
 
-            user = _context.User.FirstOrDefault(o => o.Email == userName && o.Password == password);
+            user = Context.User.FirstOrDefault(o => o.Email == userName && o.Password == password);
 
             if (user == null)
             {
