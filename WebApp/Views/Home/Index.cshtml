@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
@@ -11,6 +12,8 @@
 <!-- ##### BOX DELS PRODUCTES DE CATEGORIA O NO CATEGORIA ##### -->
 
 <div id="custom-container">
+
+    @Html.PartialAsync("Header", Model.CategoryDto).Result
     <div id="box-general">
         <div class="data-row-items">
             @foreach (var item in Model.PostDto)
