@@ -27,7 +27,8 @@ namespace WebApp.Controllers
             return o;
         }
 
-        public User GetUser() {
+        public User GetUser()
+        {
             string username = User.Claims.FirstOrDefault(o => o.Type == "Name").Value;
             if (username == null)
             {
@@ -41,21 +42,55 @@ namespace WebApp.Controllers
             return user;
         }
 
-        public PostDto PostToDto(Post post) {
+        public PostDto PostToDto(Post post)
+        {
             CategoryDto cdto = CategoryToDto(post.Category);
-            PostDto dto = new PostDto { Title = post.Title, Content = post.Content, CategoryDto = cdto};
+            PostDto dto = new PostDto { Title = post.Title, Content = post.Content, CategoryDto = cdto };
             return dto;
         }
 
-        public StoreDto StoreToDto(Store store) {
+        public StoreDto StoreToDto(Store store)
+        {
             StoreDto dto = new StoreDto { Id = store.Id, Name = store.Name };
             return dto;
         }
 
-        public CategoryDto CategoryToDto(Category category) {
-            CategoryDto dto = new CategoryDto { Id = category.Id, Name = category.Name};
+        public CategoryDto CategoryToDto(Category category)
+        {
+            CategoryDto dto = new CategoryDto { Id = category.Id, Name = category.Name };
             return dto;
         }
 
+        public Store GetStore(int storeId)
+        {
+            User user = GetUser();
+            Store store = null;
+            // check if the store is owned by the user
+            if (user.Role == "admin")
+            {
+                store = _context.Store.FirstOrDefault(o => o.Id == storeId);
+            }
+            else
+            {
+                store = _context.Store.FirstOrDefault(o => o.Id == storeId && o.User.Id == user.Id);
+            }
+            if (store == null)
+            {
+                throw new Exception("Error getting store, is not registered or the user is not the owner");
+            }
+            return store;
+        }
+
+        public Category GetCategory(int categoryId) {
+
+            Category category = _context.Category.FirstOrDefault(o => o.Id == categoryId);
+
+            if (category == null)
+            {
+                throw new Exception("Error getting category");
+            }
+
+            return category;
+        }
     }
 }

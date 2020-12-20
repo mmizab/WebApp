@@ -56,22 +56,9 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult CreatePost(AdminPostDto postdto)
         {
-            User user = GetUser();
-            Store store = null;
-            // check if the store is owned by the user
-            if (user.Role == "admin")
-            {
-                store = _context.Store.FirstOrDefault(o => o.Id == postdto.StoreId);
-            }
-            else
-            {
-                store = _context.Store.FirstOrDefault(o => o.Id == postdto.StoreId && o.User.Id == user.Id);
-            }
-            if (store == null)
-            {
-                throw new Exception("Error getting store, is not registered or the user is not the owner");
-            }
-            Post post = new Post { Store = store, Title = postdto.Title, Content = postdto.Content };
+            Store store = GetStore(postdto.StoreId);
+            Category category = GetCategory(postdto.CategoryId);
+            Post post = new Post { Store = store, Title = postdto.Title, Content = postdto.Content, Category = category };
             post.CreateDate = DateTime.Now;
             Save(post);
             if (post.Id == 0)
