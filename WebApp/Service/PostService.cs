@@ -5,16 +5,16 @@ using WebApp.DTO;
 using WebApp.Mapper;
 using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
+using WebApp.Controllers;
+using System;
 
 namespace WebApp.Service
 {
-    public class PostService
+    public class PostService:BaseService
     {
-        private WebAppContext Context { get; set; }
-        private PostMapper Mapper { get; set; } = new PostMapper();
-        public PostService(WebAppContext context)
+        private PostMapper PostMapper { get; set; }
+        public PostService(WebAppContext context): base(context)
         {
-            Context = context;
         }
 
         public List<PostDto> GetPosts()
@@ -23,9 +23,25 @@ namespace WebApp.Service
             List<PostDto> dtos = new List<PostDto>();
             foreach (var item in posts)
             {
-                dtos.Add(Mapper.PostToDto(item));
+                dtos.Add(PostMapper.PostToDto(item));
             }
             return dtos;
+        }
+
+        public void PostSave(PostDto postdto) {
+
+            Store store = StoreService.GetStore(postdto.StoreId);
+            Category category = CategoryService.GetCategory(postdto.CategoryId);
+
+            Post post = new Post { Store = store, Title = postdto.Title, Content = postdto.Content, Category = category };
+            post.CreateDate = DateTime.Now;
+
+            Save(post);
+
+            if (post.Id == 0)
+            {
+                throw new Exception("Error saving post");
+            }
         }
 
     }

@@ -1,44 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using WebApp.Data;
-using WebApp.DTO;
 using WebApp.Models;
+using WebApp.Service;
 
 namespace WebApp.Controllers
 {
     public class BaseController : Controller
     {
-        public readonly WebAppContext _context;
-        public BaseController(WebAppContext webappcontext)
+        public readonly WebAppContext Context;
+        public StoreService StoreService { get; set; }
+        public CategoryService CategoryService { get; set; }
+        public PostService PostService { get; set; }
+        public BaseController(WebAppContext context)
         {
-            _context = webappcontext;
+            Context = context;
+            StoreService = new StoreService(context);
+            CategoryService = new CategoryService(context);
+            PostService = new PostService(context);
         }
-
-        public Object Save(Object o)
-        {
-            _context.Add(o);
-            _context.SaveChanges();
-            return o;
-        }
-
-        public User GetUser()
-        {
-            string username = User.Claims.FirstOrDefault(o => o.Type == "Name").Value;
-            if (username == null)
-            {
-                throw new Exception("Error getting user information");
-            }
-            User user = _context.User.FirstOrDefault(o => o.Email == username);
-            if (user == null)
-            {
-                throw new Exception("Error getting user from database");
-            }
-            return user;
-        }
-
-
     }
 }

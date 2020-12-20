@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApp.Controllers;
 using WebApp.Data;
 using WebApp.DTO;
 using WebApp.Mapper;
@@ -8,13 +9,11 @@ using WebApp.Models;
 
 namespace WebApp.Service
 {
-    public class CategoryService
+    public class CategoryService:BaseService
     {
-        private  WebAppContext Context { get; set; }
-        private CategoryMapper Mapper { get; set; } = new CategoryMapper();
-        public CategoryService(WebAppContext context)
+        private CategoryMapper CategoryMapper { get; set; }
+        public CategoryService(WebAppContext context):base(context)
         {
-            Context = context;
         }
 
         public List<CategoryDto> GetCategoriesDto()
@@ -23,7 +22,7 @@ namespace WebApp.Service
             List<CategoryDto> dtos = new List<CategoryDto>();
             foreach (var item in categories)
             {
-                dtos.Add(Mapper.CategoryToDto(item));
+                dtos.Add(CategoryMapper.CategoryToDto(item));
             }
             return dtos;
         }

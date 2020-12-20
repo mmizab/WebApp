@@ -1,35 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using WebApp.Data;
 using WebApp.DTO;
 using WebApp.Models;
-using Microsoft.EntityFrameworkCore;
 using WebApp.Service;
 
 namespace WebApp.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger _logger;
-        private CategoryService CategoryService { get; set; }
-        public HomeController(WebAppContext webappcontext, ILogger<HomeController> logger) : base(webappcontext, logger)
+        public HomeController(WebAppContext context) : base(context)
         {
-            _logger = logger;
-            CategoryService = new CategoryService(webappcontext);
+            CategoryService = new CategoryService(context);
         }
-
-
-
 
         public IActionResult Index()
         {
             List<CategoryDto> categories = CategoryService.GetCategoriesDto();
-            List<PostDto> posts = GetPosts();
+            List<PostDto> posts = PostService.GetPosts();
 
             HomeDto homeview = new HomeDto { CategoryDto = categories, PostDto = posts};
 
