@@ -9,25 +9,26 @@ using WebApp.Models;
 
 namespace WebApp.Service
 {
-    public class StoreService:BaseService
+    public class StoreService
     {
-        private StoreMapper StoreMapper { get; set; }
-        public StoreService(WebAppContext context) : base(context)
-        {
+        private WebAppContext Context;
+        private StoreMapper StoreMapper { get; set; } = new StoreMapper();
+        public StoreService(WebAppContext context){
+            Context = context;
         }
 
-        public Store GetStore(int storeId)
+        public Store GetStore(int storeId, User user)
         {
-            User user = GetUser();
             Store store = null;
-            // check if the store is owned by the user
+            
             if (user.Role == "admin")
             {
-                store = base.Context.Store.FirstOrDefault(o => o.Id == storeId);
+                store = Context.Store.FirstOrDefault(o => o.Id == storeId);
             }
             else
             {
-                store = base.Context.Store.FirstOrDefault(o => o.Id == storeId && o.User.Id == user.Id);
+                // check if the store is owned by the user
+                store = Context.Store.FirstOrDefault(o => o.Id == storeId && o.User.Id == user.Id);
             }
             if (store == null)
             {
@@ -36,11 +37,8 @@ namespace WebApp.Service
             return store;
         }
 
-        public List<StoreDto> GetStoresDto()
+        public List<StoreDto> GetStoresDto(User user)
         {
-
-            User user = GetUser();
-
             List<Store> stores = null;
             List<StoreDto> storedto = new List<StoreDto>();
             if (user.Role == "admin")

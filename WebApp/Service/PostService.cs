@@ -7,14 +7,17 @@ using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Controllers;
 using System;
+using System.Security.Claims;
 
 namespace WebApp.Service
 {
-    public class PostService:BaseService
-    {
-        private PostMapper PostMapper { get; set; }
-        public PostService(WebAppContext context): base(context)
-        {
+    public class PostService {
+
+        private PostMapper PostMapper { get; set; } = new PostMapper();
+        private WebAppContext Context {get;set;}
+
+        public PostService(WebAppContext context){
+            Context = context;
         }
 
         public List<PostDto> GetPosts()
@@ -28,15 +31,13 @@ namespace WebApp.Service
             return dtos;
         }
 
-        public void PostSave(PostDto postdto) {
-
-            Store store = StoreService.GetStore(postdto.StoreId);
-            Category category = CategoryService.GetCategory(postdto.CategoryId);
+        public void PostSave(AdminPostDto postdto, Store store, Category category) {
 
             Post post = new Post { Store = store, Title = postdto.Title, Content = postdto.Content, Category = category };
             post.CreateDate = DateTime.Now;
 
-            Save(post);
+            Context.Post.Add(post);
+            Context.SaveChanges();
 
             if (post.Id == 0)
             {

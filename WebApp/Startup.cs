@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace WebApp
 {

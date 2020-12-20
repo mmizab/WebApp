@@ -9,11 +9,13 @@ using WebApp.Models;
 
 namespace WebApp.Service
 {
-    public class CategoryService:BaseService
+    public class CategoryService
     {
-        private CategoryMapper CategoryMapper { get; set; }
-        public CategoryService(WebAppContext context):base(context)
+        private WebAppContext Context;
+        private CategoryMapper CategoryMapper { get; set; } = new CategoryMapper();
+        public CategoryService(WebAppContext context)
         {
+            Context = context;
         }
 
         public List<CategoryDto> GetCategoriesDto()

@@ -10,9 +10,13 @@ namespace WebApp.Controllers
 {
     public class HomeController : BaseController
     {
+        private CategoryService CategoryService { get; set; }
+        private PostService PostService { get; set; }
+
         public HomeController(WebAppContext context) : base(context)
         {
             CategoryService = new CategoryService(context);
+            PostService = new PostService(context);
         }
 
         public IActionResult Index()

@@ -12,13 +12,11 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private readonly ILogger _logger;
-        private WebAppContext Context;
-        public AccountController(WebAppContext context, ILogger<AccountController> logger)        {
-            _logger = logger;
+        public AccountController(WebAppContext context) : base(context)      {
         }
+
         public IActionResult Login()
         {
             return View();
