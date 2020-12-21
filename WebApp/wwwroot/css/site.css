@@ -84,7 +84,7 @@ body {
     background-color: green;
     flex-wrap: wrap;
     flex-direction: row;
-    padding-top: 1%;
+    padding: 1%;
 }
 .box-product-categoria {
     border: 2px;
@@ -93,8 +93,8 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap:wrap;
-    max-width: 33.3333%;
-    margin: 1% 0;
+    max-width: 31.3333%;
+    margin: 1%;
 }
 .box-product-image {
     display: flex;
