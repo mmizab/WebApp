@@ -18,5 +18,6 @@ namespace WebApp.Data
         public DbSet<User> User { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Job> Job { get; set; }
     }
 }
