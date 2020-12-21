@@ -20,9 +20,17 @@ namespace WebApp.Service
             Context = context;
         }
 
-        public List<PostDto> GetPosts()
+        public List<PostDto> GetPosts(string category)
         {
-            List<Post> posts = Context.Post.Include(o => o.Category).ToList();
+            List<Post> posts = new List<Post>();
+            if (category != null)
+            {
+                posts = Context.Post.Include(o => o.Category).Where(o => o.Category.Name == category).ToList();
+            }
+            else
+            {
+                posts = Context.Post.Include(o => o.Category).ToList();
+            }
             List<PostDto> dtos = new List<PostDto>();
             foreach (var item in posts)
             {

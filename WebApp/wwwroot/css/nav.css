@@ -1,0 +1,11 @@
+﻿.nav {
+    height: 100%;
+    align-items: start;
+}
+
+a .navbar-brand {
+    white-space: normal;
+    text-align: center;
+    display: flex;
+    font-size: 18px;
+}

@@ -19,10 +19,22 @@ namespace WebApp.Controllers
             PostService = new PostService(context);
         }
 
-        public IActionResult Index()
+        [Route("/cat/{category?}")]
+        [Route("/")]
+        public IActionResult Index(string category)
         {
+            List<PostDto> posts = new List<PostDto>();
+
+            if (category != null)
+            {
+                posts = PostService.GetPosts(category);
+            }
+            else
+            {
+                posts = PostService.GetPosts(null);
+            }
             List<CategoryDto> categories = CategoryService.GetCategoriesDto();
-            List<PostDto> posts = PostService.GetPosts();
+            
 
             HomeDto homeview = new HomeDto { CategoryDto = categories, PostDto = posts};
 

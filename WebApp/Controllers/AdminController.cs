@@ -19,6 +19,7 @@ namespace WebApp.Controllers
             CategoryService = new CategoryService(context);
             PostService = new PostService(context);
         }
+
         public IActionResult Index()
         {
             User user = GetUser();
