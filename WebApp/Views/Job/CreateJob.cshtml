@@ -1,0 +1,23 @@
+﻿@model JobDto
+<h1>Crear oferta de trabajo</h1>
+<form asp-action="CreateJob" asp-controller="Job">
+    <div>
+        <label>Titulo</label>
+        <input type="text" asp-for="@Model.Title" />
+    </div>
+    <div>
+        <label>Descripcion</label>
+        <input type="text" asp-for="@Model.Description" />
+    </div>
+    <div>
+        <label>Empresa</label>
+        <input type="text" asp-for="@Model.Company" />
+    </div>
+    <div>
+        <label>Localizacion</label>
+        <input type="text" asp-for="@Model.Localization" />
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
