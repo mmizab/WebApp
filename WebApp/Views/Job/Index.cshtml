@@ -1,4 +1,5 @@
-﻿<div class="container">
+﻿@model List<JobDto>
+<div class="container">
     <h1 id="job-title">Bolsa de treball</h1>
     <table id="job-table">
         <thead>
@@ -9,17 +10,26 @@
                 <th>Empresa</th>
             </tr>
         </thead>
-        <tr>
-            <td>Data</td>
-            <td>Lloc a cobrir</td>
-            <td>Localitzacio</td>
-            <td>Empresa</td>
-        </tr>         
-        <tr>
-            <td>Data</td>
-            <td>Lloc a cobrir</td>
-            <td>Localitzacio</td>
-            <td>Empresa</td>
-        </tr>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="4" class="no-job-content">No hay ofertas de trabajo</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a asp-route-id="@item.Id" asp-action="GetJob"><div class="job-div-link">@item.CreateDate</div></a></td>
+                        <td><a asp-route-id="@item.Id" asp-action="GetJob"><div class="job-div-link">@item.Title</div></a></td>
+                        <td><a asp-route-id="@item.Id" asp-action="GetJob"><div class="job-div-link">@item.Localization</div></a></td>
+                        <td><a asp-route-id="@item.Id" asp-action="GetJob"><div class="job-div-link">@item.Company</div></a></td>
+                    </tr>
+
+                }
+            }
+
+        </tbody>
+
     </table>
 </div>

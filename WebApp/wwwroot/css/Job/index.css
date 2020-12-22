@@ -18,3 +18,12 @@
 #job-table, th, td {
     border: 1px solid black;
 }
+
+.no-job-content {
+    text-align: center; 
+}
+
+.job-div-link {
+    height: 100%;
+    width: 100%;
+}

@@ -1,18 +1,18 @@
 ﻿@model List<CategoryDto>
-    <header>
-        <nav class="nav navbar navbar-expand-sm bg-white border-bottom box-shadow mb-3">
-            <div class="container container-list-horizontal">
-                <a class="navbar-brand" asp-action="">Categoria</a>
-                <div class="">
-                    <ul class="navbar-nav container-list-horizontal">
-                        @foreach (var item in Model)
-                        {
-                            <li class="">
-                                <a class="nav-link text-dark" asp-route-category="@item.Name" asp-action="Index">@item.Name</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
+<header>
+    <nav class="nav navbar navbar-expand-sm bg-white border-bottom box-shadow mb-3">
+        <div class="container container-list-horizontal">
+            <h5 class="menu-title">Categories</h5>
+            <div class="">
+                <ul class="navbar-nav container-list-horizontal">
+                    @foreach (var item in Model)
+                    {
+                        <li class="">
+                            <a class="nav-link text-dark" asp-route-category="@item.Name" asp-action="Index">@item.Name</a>
+                        </li>
+                    }
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>

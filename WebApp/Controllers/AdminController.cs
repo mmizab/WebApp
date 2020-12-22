@@ -20,6 +20,7 @@ namespace WebApp.Controllers
             PostService = new PostService(context);
         }
 
+        [Route("/admin")]
         public IActionResult Index()
         {
             User user = GetUser();
