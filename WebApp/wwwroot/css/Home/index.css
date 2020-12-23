@@ -1,0 +1,35 @@
+﻿
+#box-general {
+    display: flex;
+    align-self: start;
+}
+
+.box-product-categoria {
+    border: 2px;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 31.3333%;
+    margin: 1%;
+    background-color: #f5f5f5;
+    background-color: #4c4c4c;
+    color: #F0EAD6;
+}
+
+.data-row-items {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 1%;
+}
+
+.box-product-image {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.description-box {
+    display: flex;
+}

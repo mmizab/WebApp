@@ -3,20 +3,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-<div class="text-center">
-    <h2 class="display-4">Ofertes</h2>
-    <div>
-        <a href="/bolsa">Bolsa de treball</a>
-    </div>
-</div>
-
 <!-- ##### BOX DELS PRODUCTES DE CATEGORIA O NO CATEGORIA ##### -->
-
-<div id="custom-container">
+<h2 class="title"><b>Ofertes de comersos</b></h2>
+<div class="container-flex">
 
     @Html.PartialAsync("Header", Model.CategoryDto).Result
-    <div id="box-general">
+    <div id="box-general" class="box-shadow">
         <div class="data-row-items">
             @foreach (var item in Model.PostDto)
             {
@@ -27,7 +19,7 @@
                         Aquí anirà una imatge de la tenda o categoria.!
                     </div>
                     <div class="description-box">
-                        <a style="color: green;"><span>@item.Content</span></a>
+                        <a><span>@item.Content</span></a>
                     </div>
                     <div>
                         <label>Category: @item.CategoryDto.Name</label>

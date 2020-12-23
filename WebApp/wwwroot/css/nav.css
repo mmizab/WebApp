@@ -1,15 +1,9 @@
-﻿.nav {
-    height: 100%;
+﻿nav {
+    height:100%;
     align-items: start;
 }
 
-a .navbar-brand {
-    white-space: normal;
-    text-align: center;
-    display: flex;
-    font-size: 18px;
-}
-
-.menu-title {
-    color: #121416;
+header, nav {
+    background: #dee2e6;
+    height: auto;
 }

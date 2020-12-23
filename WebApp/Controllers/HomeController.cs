@@ -19,8 +19,9 @@ namespace WebApp.Controllers
             PostService = new PostService(context);
         }
 
-        [Route("/cat/{category?}")]
         [Route("/")]
+        [Route("/ofertes")]
+        [Route("/ofertes/{category?}")]
         public IActionResult Index(string category)
         {
             List<PostDto> posts = new List<PostDto>();

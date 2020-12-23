@@ -1,5 +1,14 @@
-﻿/* Provide sufficient contrast against white background */
-
+﻿
+.title {
+    text-align: center;
+}
+.container-flex {
+    display: flex;
+}
+.container-flex-column {
+   display: flex;
+   flex-direction: column;
+}
 a, a:hover {
     color: inherit;
     text-decoration: none; /* no underline */
@@ -50,8 +59,8 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    color: white;
-    background: rgb(24, 26, 27);
+    color: #121416;
+    background: #F0EAD6;
 }
 
 .footer {
@@ -66,50 +75,10 @@ body {
 /* Custom */
 #custom-container {
     display: flex;
-    background-color: blue;
 }
 
 /* llista esquerre vertical*/
-.container-list-horizontal {
+.container-flex-horizontal {
     display: flex;
     flex-direction: column !important;
-}
-
-.pb-3 {
-    background-color: red;
-}
-
-/* Caja general - dentro todas las cajas de las tiendas */
-#box-general {
-    display: flex;
-}
-
-.data-row-items {
-    display: flex;
-    background-color: green;
-    flex-wrap: wrap;
-    flex-direction: row;
-    padding: 1%;
-}
-
-.box-product-categoria {
-    border: 2px;
-    border-style: solid;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 31.3333%;
-    margin: 1%;
-}
-
-.box-product-image {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-.description-box {
-    display: flex;
-    background-color: yellow;
 }

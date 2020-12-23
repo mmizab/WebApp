@@ -28,14 +28,14 @@ namespace WebApp.Data
 
             List<User> users = new List<User>();
             users.Add(new User { Email = "admin", Password = "1" , Role = "admin"});
-            users.Add(new User { Email = "test@test.com", Password = "1", Role = "client"});
+            users.Add(new User { Email = "test", Password = "1", Role = "client"});
 
             context.AddRange(users);
             context.SaveChanges();
 
             // load test user to create test store 
             Store store = null;
-            User test = users.FirstOrDefault(o => o.Email == "test@test.com");
+            User test = users.FirstOrDefault(o => o.Email == "admin");
             if ( test != null && test.Id != 0)
             {
                 store = new Store { Name = "test store", User = test };
@@ -46,24 +46,27 @@ namespace WebApp.Data
 
             List<Category> category = new List<Category>
             {
+                new Category { Name = "Alimentació" },
+                new Category { Name = "Llar" },
+                new Category { Name = "Floristeria" },
+                new Category { Name = "Cine" },
+                new Category { Name = "Informàtica" },
+                new Category { Name = "Immobiliaria" },
+                new Category { Name = "Electrodomestic" },
+                new Category { Name = "Tenda de regals" },
+                new Category { Name = "Joieria" },
+                new Category { Name = "Panaderia" },
+                new Category { Name = "Llibreria" },
+                new Category { Name = "Roba" },
+                new Category { Name = "Gelateria" },
+                new Category { Name = "Adm de loteria" },
+                new Category { Name = "Estancs" },
+                new Category { Name = "Farmàcia" },
                 new Category { Name = "test" }
             };
             context.AddRange(category);
             context.SaveChanges();
 
-
-            if (store != null && store.Id != 0) {
-                List<Post> posts = new List<Post>
-                {
-                    new Post { Store = store, Title = "First post", CreateDate = DateTime.Now, Content = "First post content"},
-                    new Post { Store = store, Title = "Second post", CreateDate = DateTime.Now, Content = "Second post content" },
-                    new Post { Store = store, Title = "Third post", CreateDate = DateTime.Now, Content = "Third post content" }
-                };
-
-                context.AddRange(posts);
-                context.SaveChanges();
-            }
-            
         }
 
 

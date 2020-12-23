@@ -1,10 +1,10 @@
 ﻿@model List<CategoryDto>
-<header>
-    <nav class="nav navbar navbar-expand-sm bg-white border-bottom box-shadow mb-3">
-        <div class="container container-list-horizontal">
-            <h5 class="menu-title">Categories</h5>
+<header class="box-shadow">
+    <nav class="nav navbar" >
+        <div class="container container-flex-horizontal">
+            <h5>Categories</h5>
             <div class="">
-                <ul class="navbar-nav container-list-horizontal">
+                <ul class="navbar-nav">
                     @foreach (var item in Model)
                     {
                         <li class="">
