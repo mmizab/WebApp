@@ -20,7 +20,7 @@ namespace WebApp.Service
 
         public List<CategoryDto> GetCategoriesDto()
         {
-            List<Category> categories = Context.Category.ToList();
+            List<Category> categories = Context.Category.OrderBy(o => o.Name).ToList();
             List<CategoryDto> dtos = new List<CategoryDto>();
             foreach (var item in categories)
             {

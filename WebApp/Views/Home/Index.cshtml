@@ -5,26 +5,30 @@
 
 <!-- ##### BOX DELS PRODUCTES DE CATEGORIA O NO CATEGORIA ##### -->
 <h2 class="title"><b>Ofertes de comersos</b></h2>
-<div class="container-flex">
+<div class="container-flex container-sm">
 
     @Html.PartialAsync("Header", Model.CategoryDto).Result
-    <div id="box-general" class="box-shadow">
+    <div id="box-general" >
         <div class="data-row-items">
-            @foreach (var item in Model.PostDto)
+            @if (Model.PostDto.Count == 0)
             {
-                <div class="box-product-categoria">
-                    <label>Title: @item.Title</label>
-                    <div class="box-product-image">
-                        <p>BOX.1</p>
-                        Aquí anirà una imatge de la tenda o categoria.!
+            <h4>No hi ha productes</h4>
+            }
+            else
+            {
+                @foreach (var item in Model.PostDto)
+                {
+                    <div class="box-product-categoria box-shadow">
+                        <label class="container-flex">@item.Title</label>
+                        <div class="box-product-image container-flex">
+                            <p class="container-flex">BOX.1</p>
+                            <p class="container-flex">Aquí anirà una imatge de la tenda o categoria.!</p>
+                        </div>
+                        <div class="description-box">
+                            <p>@item.Content</p>
+                        </div>
                     </div>
-                    <div class="description-box">
-                        <a><span>@item.Content</span></a>
-                    </div>
-                    <div>
-                        <label>Category: @item.CategoryDto.Name</label>
-                    </div>
-                </div>
+                }
             }
         </div>
 
