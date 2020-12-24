@@ -1,9 +1,8 @@
 ﻿@model List<CategoryDto>
-<header class="box-shadow">
-    <nav class="nav navbar" >
-        <div class="container container-flex-column">
-            <h5>Categories</h5>
-            <div class="">
+<header class="box-shadow" id="toggle-menu">
+        <nav class="nav navbar w-100" id="toggle-menu-show">
+            <h5 class="title w-100">Categories</h5>
+            <div id="toggle-menu-list" class="w-100 text-center">
                 <ul class="navbar-nav">
                     @foreach (var item in Model)
                     {
@@ -13,6 +12,5 @@
                     }
                 </ul>
             </div>
-        </div>
-    </nav>
+        </nav>
 </header>

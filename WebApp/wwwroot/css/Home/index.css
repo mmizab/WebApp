@@ -4,16 +4,19 @@
     align-self: start;
     width: 100%;
 }
+
 @media (max-width: 768px) {
     .box-product-categoria {
         max-width:100%!important;
     }
 }
+
 @media (max-width: 480px) {
     .container-sm {
         flex-direction: column;
     }
 }
+
 .box-product-categoria {
     border: 1.5px;
     border-radius: 10px;
