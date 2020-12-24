@@ -1,0 +1,12 @@
+﻿@model CurriculumDto
+<div>
+    <form class="flex-column d-flex" asp-action="SaveCurriculum" >
+        <label>Experiencia</label>
+        <input asp-for="@Model.Experiencia"/>
+        <label>Formacion</label>
+        <input asp-for="@Model.Formacion"/>
+        <label>Informacio adicional</label>
+        <input asp-for="@Model.InfoAdicional"/>
+        <input type="submit" value="Save" />
+    </form>
+</div>

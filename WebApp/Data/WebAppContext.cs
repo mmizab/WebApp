@@ -9,7 +9,7 @@ namespace WebApp.Data
 {
     public class WebAppContext : DbContext
     {
-        public WebAppContext(DbContextOptions<WebAppContext> options): base(options)
+        public WebAppContext(DbContextOptions<WebAppContext> options) : base(options)
         {
 
         }
@@ -19,5 +19,6 @@ namespace WebApp.Data
         public DbSet<Store> Store { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Job> Job { get; set; }
+        public DbSet<Curriculum> Curriculum { get; set; }
     }
 }

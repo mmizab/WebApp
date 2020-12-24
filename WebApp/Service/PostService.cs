@@ -72,7 +72,7 @@ namespace WebApp.Service
 
 
             QRCodeGenerator QRCodeGenerator = new QRCodeGenerator();
-            QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode("Its working :D !", QRCodeGenerator.ECCLevel.Q);
+            QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode("https://google.com", QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(QRCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
             byte[] qrBytecode = BaseController.BitmapToBytesCode(qrCodeImage);
