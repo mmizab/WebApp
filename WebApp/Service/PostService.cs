@@ -25,11 +25,11 @@ namespace WebApp.Service
             List<Post> posts = new List<Post>();
             if (category != null)
             {
-                posts = Context.Post.Include(o => o.Category).Where(o => o.Category.Name == category).ToList();
+                posts = Context.Post.Include(o => o.Category).Include(o => o.Store).Where(o => o.Category.Name == category).ToList();
             }
             else
             {
-                posts = Context.Post.Include(o => o.Category).ToList();
+                posts = Context.Post.Include(o => o.Category).Include(o => o.Store).ToList();
             }
             List<PostDto> dtos = new List<PostDto>();
             foreach (var item in posts)
@@ -53,5 +53,17 @@ namespace WebApp.Service
             }
         }
 
+        internal PostDto GetPost(int id)
+        {
+            Post post = Context.Post.Include(o => o.Category).Include(o => o.Store).FirstOrDefault(o => o.Id == id);
+            if (post == null)
+            {
+                throw new Exception("Error finding post");
+            }
+
+            PostDto dto = PostMapper.PostToDto(post);
+
+            return dto;
+        }
     }
 }

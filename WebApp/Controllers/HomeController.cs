@@ -42,9 +42,10 @@ namespace WebApp.Controllers
             return View(homeview);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
+        [Route("/oferta/{id}")]
+        public IActionResult GetPost(int id) {
+            PostDto post = PostService.GetPost(id);
+            return View(post);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

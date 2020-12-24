@@ -89,6 +89,7 @@ namespace WebApp
 
             app.UseRouting();
 
+            app.UseStatusCodePages();
 
             app.UseAuthorization();
 

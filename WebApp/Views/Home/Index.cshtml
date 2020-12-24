@@ -8,18 +8,18 @@
 <div class="container-flex container-sm">
 
     @Html.PartialAsync("Header", Model.CategoryDto).Result
-    <div id="box-general" >
+    <div id="box-general">
         <div class="data-row-items">
             @if (Model.PostDto.Count == 0)
             {
-            <h4>No hi ha productes</h4>
+                <h4>No hi ha productes</h4>
             }
             else
             {
                 @foreach (var item in Model.PostDto)
                 {
-                    <div class="box-product-categoria box-shadow">
-                        <label class="container-flex">@item.Title</label>
+                    <a asp-route-id="@item.Id" asp-action="GetPost" class="box-product-categoria box-shadow">
+                        <span class="container-flex">@item.Title</span>
                         <div class="box-product-image container-flex">
                             <p class="container-flex">BOX.1</p>
                             <p class="container-flex">Aquí anirà una imatge de la tenda o categoria.!</p>
@@ -27,7 +27,7 @@
                         <div class="description-box">
                             <p>@item.Content</p>
                         </div>
-                    </div>
+                    </a>
                 }
             }
         </div>
