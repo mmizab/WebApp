@@ -1,4 +1,11 @@
-﻿.title {
+﻿#menu-pages a{
+    padding: 0 10px;
+}
+#menu-pages a:hover {
+    text-decoration: dashed !important;
+    text-decoration-line: underline;
+}
+.title {
     text-align: center;
 }
 .container-flex {
