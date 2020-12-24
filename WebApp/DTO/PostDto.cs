@@ -15,5 +15,6 @@ namespace WebApp.DTO
         public string Content { get; set; }
         public CategoryDto CategoryDto { get; set; }
         public int CategoryId { get; set; }
+        public byte[] QrCode { get; set; }
     }
 }

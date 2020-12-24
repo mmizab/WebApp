@@ -3,4 +3,6 @@
     <h4>@Model.Title</h4>
     <p>@Model.StoreDto.Name</p>
     <p>@Model.Content</p>
+    <img src="@String.Format("data:image/png;base64,{0}",
+ Convert.ToBase64String(Model.QrCode))" height="300" width="300" />
 </div>

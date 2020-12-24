@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Controllers;
 using System;
 using System.Security.Claims;
+using System.Drawing;
+using QRCoder;
 
 namespace WebApp.Service
 {
@@ -34,7 +36,11 @@ namespace WebApp.Service
             List<PostDto> dtos = new List<PostDto>();
             foreach (var item in posts)
             {
-                dtos.Add(PostMapper.PostToDto(item));
+                PostDto dto = PostMapper.PostToDto(item);
+
+
+
+                dtos.Add(dto);
             }
             return dtos;
         }
@@ -61,7 +67,16 @@ namespace WebApp.Service
                 throw new Exception("Error finding post");
             }
 
+
             PostDto dto = PostMapper.PostToDto(post);
+
+
+            QRCodeGenerator QRCodeGenerator = new QRCodeGenerator();
+            QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode("Its working :D !", QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(QRCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            byte[] qrBytecode = BaseController.BitmapToBytesCode(qrCodeImage);
+            dto.QrCode = qrBytecode;
 
             return dto;
         }
