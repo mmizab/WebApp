@@ -25,11 +25,22 @@ namespace WebApp.Controllers
             List<StorePoints> points = Context.StorePoints.Include(o => o.Store).Include(o => o.User).Where(o => o.User == user).ToList();
             List<Store> stores = Context.Store.Where(o => o.User == user).ToList();
             List<StorePointsHistory> history = new List<StorePointsHistory>();
+
             foreach (var item in stores)
             {
-                history.AddRange(Context.StorePointsHistory.Where(o => o.StorePoints.Store == item).ToList());
+                history.AddRange(Context.StorePointsHistory.Include(o => o.StorePoints.Store).Include(o => o.StorePoints.User).Where(o => o.StorePoints.Store == item).ToList());
             }
-            history.AddRange(Context.StorePointsHistory.Where(o => o.StorePoints.User == user).ToList());
+
+            List<StorePointsHistory> userHistory = Context.StorePointsHistory.Include(o => o.StorePoints.Store).Include(o => o.StorePoints.User).Where(o => o.StorePoints.User == user).ToList();
+            foreach (var item in userHistory)
+            {
+                // check for duplicas
+                var found = history.FirstOrDefault(o => o.Id == item.Id);
+                if (found == null)
+                {
+                    history.Add(item);
+                }
+            }
 
             StorePointsDto dto = new StorePointsDto { StorePoints = points , StorePointsHistory = history};
 
@@ -44,14 +55,13 @@ namespace WebApp.Controllers
             //User to add the points
             User clientUser = Context.User.FirstOrDefault(o => o.Id == userId);
 
-
-            Post post = Context.Post.FirstOrDefault(o => o.Id == postId);
-            
             Store store = Context.Store.FirstOrDefault(o => o.Id == storeId);
             if (store.User != user)
             {
-                throw new Exception("User trying to add points is not the admin of the store");
+                return RedirectToAction("Index");
             }
+
+            Post post = Context.Post.FirstOrDefault(o => o.Id == postId);
 
             // load points or create new register and add the points
             StorePoints storePoints = Context.StorePoints.FirstOrDefault(o => o.User == clientUser);
