@@ -46,7 +46,7 @@ namespace WebApp.Controllers
 
             try
             {
-                MailService.SendMail("Experiencia: \n" + dto.Experiencia + "\n" + "Formacion: \n" + dto.Formacion + "\n" + "Informacion adicional: \n" + dto.InfoAdicional);
+                //MailService.SendMail("Experiencia: \n" + dto.Experiencia + "\n" + "Formacion: \n" + dto.Formacion + "\n" + "Informacion adicional: \n" + dto.InfoAdicional);
             }
             catch (Exception)
             {
