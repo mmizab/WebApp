@@ -44,7 +44,12 @@ namespace WebApp.Controllers
 
         [Route("/oferta/{id}")]
         public IActionResult GetPost(int id) {
+            User user = GetUser();
             PostDto post = PostService.GetPost(id);
+            if (post.StoreDto != null && post.StoreDto.UserId == user.Id)
+            {
+                post.StoreDto.Owner = true;
+            }
             return View(post);
         }
 

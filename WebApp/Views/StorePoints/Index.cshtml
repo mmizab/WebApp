@@ -1,0 +1,35 @@
+﻿@model List<StorePoints>
+<div>
+    <h2 class="title"></h2>
+    <table id="job-table">
+        <thead>
+            <tr>
+                <th>Data creacio</th>
+                <th>Data actualizacio</th>
+                <th>Nom tenda</th>
+                <th>Punts</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="4" class="no-job-content">No hay ofertas de trabajo</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><div class="job-div-link">@item.CreateTime</div></td>
+                        <td><div class="job-div-link">@item.UpdateTime</div></td>
+                        <td><div class="job-div-link">@item.Store.Name</div></td>
+                        <td><div class="job-div-link">@item.Points</div></td>
+                    </tr>
+
+                }
+            }
+
+        </tbody>
+
+    </table>
+</div>

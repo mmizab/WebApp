@@ -6,3 +6,13 @@
     <img src="@String.Format("data:image/png;base64,{0}",
  Convert.ToBase64String(Model.QrCode))" height="300" width="300" />
 </div>
+<div>
+    <form asp-action="AddPoints" asp-controller="StorePoints">
+        <label>StoreId</label>
+        <input type="number" name="storeId" value="@Model.StoreDto.Id" />
+        <label>Points</label>
+        <input type="number" name="storeId" value="@Model.StoreDto.Id" />
+        <label>UserId</label>
+        <input type="number" name="userId" value="" />
+    </form>
+</div>

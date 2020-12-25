@@ -5,11 +5,8 @@ using WebApp.DTO;
 using WebApp.Mapper;
 using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Controllers;
 using System;
-using System.Security.Claims;
-using System.Drawing;
-using QRCoder;
+
 
 namespace WebApp.Service
 {
@@ -67,16 +64,11 @@ namespace WebApp.Service
                 throw new Exception("Error finding post");
             }
 
-
             PostDto dto = PostMapper.PostToDto(post);
 
+            byte[] qrcode = CodeQrService.GenerateQr(Config.AppDomain + "/oferta/" + post.Id);
+            dto.QrCode = qrcode;
 
-            QRCodeGenerator QRCodeGenerator = new QRCodeGenerator();
-            QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode("https://google.com", QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(QRCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
-            byte[] qrBytecode = BaseController.BitmapToBytesCode(qrCodeImage);
-            dto.QrCode = qrBytecode;
 
             return dto;
         }

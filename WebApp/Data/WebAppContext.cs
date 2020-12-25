@@ -20,5 +20,6 @@ namespace WebApp.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Job> Job { get; set; }
         public DbSet<Curriculum> Curriculum { get; set; }
+        public DbSet<StorePoints> StorePoints { get; set; }
     }
 }
