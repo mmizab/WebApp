@@ -17,13 +17,17 @@ namespace WebApp.Controllers
         public AccountController(WebAppContext context) : base(context)      {
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
+            if (ReturnUrl != null)
+            {
+                ViewData["returnUrl"] = ReturnUrl;
+            }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(string userName, string password)
+        public async Task<IActionResult> LoginAsync(string userName, string password, string returnUrl)
         {
             User user = null;
 
@@ -50,6 +54,8 @@ namespace WebApp.Controllers
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddHours(8), IsPersistent = false, AllowRefresh = true });
 
+            if (Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
             return RedirectToAction("Index", "Admin");
         }
 

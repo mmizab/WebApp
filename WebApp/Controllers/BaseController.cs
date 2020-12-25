@@ -20,11 +20,17 @@ namespace WebApp.Controllers
         }
         public User GetUser()
         {
-            string username = User.Claims.FirstOrDefault(o => o.Type == "Name").Value;
-            if (username == null)
+
+            Claim claim = User.Claims.FirstOrDefault(o => o.Type == "Name");
+            
+            if(claim == null)
             {
-                throw new Exception("Error getting user information");
+                return null;
             }
+            
+            string username = claim.Value;
+
+
             User user = Context.User.FirstOrDefault(o => o.Email == username);
             if (user == null)
             {

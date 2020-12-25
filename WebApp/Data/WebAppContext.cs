@@ -21,5 +21,6 @@ namespace WebApp.Data
         public DbSet<Job> Job { get; set; }
         public DbSet<Curriculum> Curriculum { get; set; }
         public DbSet<StorePoints> StorePoints { get; set; }
+        public DbSet<StorePointsHistory> StorePointsHistory {get;set;}
     }
 }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Data;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20201225132132_points")]
+    partial class points
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,31 +171,6 @@ namespace WebApp.Migrations
                     b.ToTable("StorePoints");
                 });
 
-            modelBuilder.Entity("WebApp.Models.StorePointsHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Operation")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StorePointsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StorePointsId");
-
-                    b.ToTable("StorePointsHistory");
-                });
-
             modelBuilder.Entity("WebApp.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -264,13 +241,6 @@ namespace WebApp.Migrations
                     b.HasOne("WebApp.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebApp.Models.StorePointsHistory", b =>
-                {
-                    b.HasOne("WebApp.Models.StorePoints", "StorePoints")
-                        .WithMany()
-                        .HasForeignKey("StorePointsId");
                 });
 #pragma warning restore 612, 618
         }

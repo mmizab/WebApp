@@ -3,16 +3,18 @@
     <h4>@Model.Title</h4>
     <p>@Model.StoreDto.Name</p>
     <p>@Model.Content</p>
-    <img src="@String.Format("data:image/png;base64,{0}",
- Convert.ToBase64String(Model.QrCode))" height="300" width="300" />
+    <h4>Codigo QR de la oferta</h4>
+    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.QrCode))" height="300" width="300" />
 </div>
-<div>
-    <form asp-action="AddPoints" asp-controller="StorePoints">
-        <label>StoreId</label>
-        <input type="number" name="storeId" value="@Model.StoreDto.Id" />
-        <label>Points</label>
-        <input type="number" name="storeId" value="@Model.StoreDto.Id" />
-        <label>UserId</label>
-        <input type="number" name="userId" value="" />
-    </form>
-</div>
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    @if (Model.UserQrCode != null)
+    {
+        <div>
+            <h4>Codigo QR del Cliente</h4>
+            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.UserQrCode))" height="300" width="300" />
+        </div>
+    }
+
+}

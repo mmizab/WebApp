@@ -12,5 +12,6 @@ namespace WebApp.Models
         public DateTime CreateDate { get; set; }
         public Store Store { get; set; }
         public Category Category { get; set; }
+        public int Points { get; set; }
     }
 }

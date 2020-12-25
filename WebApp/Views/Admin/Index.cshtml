@@ -21,6 +21,10 @@
         <input type="text" asp-for="@Model.Content" value="" />
     </div>
     <div>
+        <label>Points</label>
+        <input type="text" asp-for="@Model.Points"/>
+    </div>
+    <div>
         <label>Category:</label>
         <select asp-for="@Model.CategoryId" asp-items="@(new SelectList(Model.CategoryDto,"Id", "Name"))">
             <option value="">Pick option</option>

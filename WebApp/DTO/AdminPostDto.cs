@@ -14,5 +14,6 @@ namespace WebApp.DTO
         public string Content { get; set; }
         public List<CategoryDto> CategoryDto { get; set; }
         public int CategoryId { get; set; }
+        public int Points { get; set; }
     }
 }

@@ -5,9 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Data;
 using WebApp.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using WebApp.DTO;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class StorePointsController : BaseController
     {
         public StorePointsController(WebAppContext context):base(context)
@@ -18,19 +22,31 @@ namespace WebApp.Controllers
         public IActionResult Index()
         {
             User user = GetUser();
-            List<StorePoints> points = Context.StorePoints.Where(o => o.User == user).ToList();
+            List<StorePoints> points = Context.StorePoints.Include(o => o.Store).Include(o => o.User).Where(o => o.User == user).ToList();
+            List<Store> stores = Context.Store.Where(o => o.User == user).ToList();
+            List<StorePointsHistory> history = new List<StorePointsHistory>();
+            foreach (var item in stores)
+            {
+                history.AddRange(Context.StorePointsHistory.Where(o => o.StorePoints.Store == item).ToList());
+            }
+            history.AddRange(Context.StorePointsHistory.Where(o => o.StorePoints.User == user).ToList());
 
-            return View();
+            StorePointsDto dto = new StorePointsDto { StorePoints = points , StorePointsHistory = history};
+
+            return View(dto);
         }
 
-        [HttpPost]
-        public IActionResult AddPoints(int points, int storeId, int userId) {
+        [Route("/addpoints")]
+        public IActionResult AddPoints(int postId, int storeId, int userId) {
             // this user should be the admin of the store
             User user = GetUser();
             
             //User to add the points
             User clientUser = Context.User.FirstOrDefault(o => o.Id == userId);
 
+
+            Post post = Context.Post.FirstOrDefault(o => o.Id == postId);
+            
             Store store = Context.Store.FirstOrDefault(o => o.Id == storeId);
             if (store.User != user)
             {
@@ -44,13 +60,26 @@ namespace WebApp.Controllers
                 storePoints = new StorePoints() { User = clientUser, CreateTime = DateTime.Now, Store = store};
             }
 
-            storePoints.Points += points;
+            storePoints.Points += post.Points;
             storePoints.UpdateTime = DateTime.Now;
 
-            Context.Add(storePoints);
-            Context.SaveChanges();
+            if (storePoints.Id == 0)
+            {
+                Context.Add(storePoints);
+                Context.SaveChanges();
+
+            }
+            else
+            {
+                Context.Update(storePoints);
+                Context.SaveChanges();
+            }
 
             // should implement store points history and redirect the store owner there.
+            StorePointsHistory history = new StorePointsHistory { StorePoints = storePoints, Points = post.Points, Operation = "add", CreateTime = DateTime.Now };
+            Context.Add(history);
+            Context.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

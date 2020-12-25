@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Data;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    partial class WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20201225162518_storepointshistoryupdate")]
+    partial class storepointshistoryupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,7 +193,7 @@ namespace WebApp.Migrations
 
                     b.HasIndex("StorePointsId");
 
-                    b.ToTable("StorePointsHistory");
+                    b.ToTable("StorePointHistory");
                 });
 
             modelBuilder.Entity("WebApp.Models.User", b =>

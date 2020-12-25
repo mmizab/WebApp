@@ -49,10 +49,6 @@ namespace WebApp.Service
             {
                 stores = Context.Store.Where(o => o.User.Id == user.Id).ToList();
             }
-            if (stores == null || stores.Count == 0)
-            {
-                throw new Exception("Error getting store information");
-            }
 
             foreach (var item in stores)
             {

@@ -44,7 +44,7 @@ namespace WebApp.Service
 
         public void PostSave(AdminPostDto postdto, Store store, Category category) {
 
-            Post post = new Post { Store = store, Title = postdto.Title, Content = postdto.Content, Category = category };
+            Post post = new Post { Store = store, Title = postdto.Title, Content = postdto.Content, Category = category, Points = postdto.Points};
             post.CreateDate = DateTime.Now;
 
             Context.Post.Add(post);

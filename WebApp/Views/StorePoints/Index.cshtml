@@ -1,6 +1,6 @@
-﻿@model List<StorePoints>
+﻿@model StorePointsDto
 <div>
-    <h2 class="title"></h2>
+    <h2 class="">Punts acomulats</h2>
     <table id="job-table">
         <thead>
             <tr>
@@ -11,25 +11,59 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.Count == 0)
+            @if (Model.StorePoints.Count == 0)
             {
-                <tr><td colspan="4" class="no-job-content">No hay ofertas de trabajo</td></tr>
+                <tr><td colspan="4" class="no-job-content">No hi ha registres.</td></tr>
             }
             else
             {
-                @foreach (var item in Model)
+                @foreach (var item in Model.StorePoints)
                 {
                     <tr>
-                        <td><div class="job-div-link">@item.CreateTime</div></td>
-                        <td><div class="job-div-link">@item.UpdateTime</div></td>
-                        <td><div class="job-div-link">@item.Store.Name</div></td>
-                        <td><div class="job-div-link">@item.Points</div></td>
+                        <td><div class="">@item.CreateTime</div></td>
+                        <td><div class="">@item.UpdateTime</div></td>
+                        <td><div class="">@item.Store.Name</div></td>
+                        <td><div class="">@item.Points</div></td>
                     </tr>
 
                 }
             }
 
         </tbody>
+    </table>
+</div>
+<div>
+    <h2 class="">Historial de punts</h2>
+    <table id="job-table">
+        <thead>
+            <tr>
+                <th>Data creacio</th>
+                <th>Nom tenda</th>
+                <th>Operacio</th>
+                <th>Punts</th>
+                <th>Usuari</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.StorePointsHistory.Count == 0)
+            {
+                <tr><td colspan="5" class="no-job-content">No hi ha registres.</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.StorePointsHistory)
+                {
+                    <tr>
+                        <td><div class="">@item.CreateTime</div></td>
+                        <td><div class="">@item.StorePoints.Store.Name</div></td>
+                        <td><div class="">@item.Operation</div></td>
+                        <td><div class="">@item.Points</div></td>
+                        <td><div class="">@item.StorePoints.User.Name @item.StorePoints.User.Surname</div></td>
+                    </tr>
+                }
+            }
 
+        </tbody>
     </table>
 </div>

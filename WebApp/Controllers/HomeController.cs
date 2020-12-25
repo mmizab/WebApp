@@ -46,9 +46,12 @@ namespace WebApp.Controllers
         public IActionResult GetPost(int id) {
             User user = GetUser();
             PostDto post = PostService.GetPost(id);
-            if (post.StoreDto != null && post.StoreDto.UserId == user.Id)
+
+            if (user != null)
             {
-                post.StoreDto.Owner = true;
+                // generate qr code pointing to endpoint with need parameters
+                byte[] qrcode = CodeQrService.GenerateQr(Config.AppDomain + "/addpoints?postid=" + post.Id + "&storeid=" +post.StoreDto.Id + "&userid=" + user.Id);
+                post.UserQrCode = qrcode;
             }
             return View(post);
         }
