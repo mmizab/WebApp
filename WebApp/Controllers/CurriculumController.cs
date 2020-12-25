@@ -13,6 +13,7 @@ namespace WebApp.Controllers
     public class CurriculumController : BaseController
     {
         public CurriculumService CurriculumService { get; set; }
+        public MailService MailService = new MailService();
 
         public CurriculumController(WebAppContext context) : base(context)
         {
@@ -39,9 +40,19 @@ namespace WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult SubmitCurriculum() {
+        public IActionResult SubmitCurriculum(int jobId) {
             User user = GetUser();
+            CurriculumDto dto = CurriculumService.GetCurriculum(user);
 
+            try
+            {
+                MailService.SendMail("Experiencia: \n" + dto.Experiencia + "\n" + "Formacion: \n" + dto.Formacion + "\n" + "Informacion adicional: \n" + dto.InfoAdicional);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
             return RedirectToAction("Index");
         }
     }
