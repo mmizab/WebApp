@@ -18,7 +18,7 @@
 {
     <div>
         <form asp-action="SubmitCurriculum" asp-controller="Curriculum">
-            <input name="jobId"  value="@Model.Id"/>
+            <input type="hidden" name="jobId"  value="@Model.Id"/>
             <input type="submit" value="Submit curriculum" />
         </form>
     </div>

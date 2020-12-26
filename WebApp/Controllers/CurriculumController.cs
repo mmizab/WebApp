@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApp.Data;
 using WebApp.DTO;
 using WebApp.Models;
@@ -10,6 +8,7 @@ using WebApp.Service;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class CurriculumController : BaseController
     {
         public CurriculumService CurriculumService { get; set; }
