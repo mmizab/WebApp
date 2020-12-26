@@ -8,41 +8,29 @@ using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using WebApp.DTO;
+using WebApp.Service;
 
 namespace WebApp.Controllers
 {
     [Authorize]
     public class StorePointsController : BaseController
     {
+        private StorePointsService StorePointsService { get; set; }
+        private StorePointsHistoryService StorePointsHistoryService { get; set; }
         public StorePointsController(WebAppContext context):base(context)
         {
-
+            StorePointsService = new StorePointsService(context);
+            StorePointsHistoryService = new StorePointsHistoryService(context);
         }
+
         [Route("/punts")]
         public IActionResult Index()
         {
             User user = GetUser();
-            List<StorePoints> points = Context.StorePoints.Include(o => o.Store).Include(o => o.User).Where(o => o.User == user).ToList();
-            List<Store> stores = Context.Store.Where(o => o.User == user).ToList();
-            List<StorePointsHistory> history = new List<StorePointsHistory>();
+            List<StorePointsDto> points = StorePointsService.GetStorePoints(user);
+            List<StorePointsHistoryDto> history = StorePointsHistoryService.GetStorePointsHistory(user);
 
-            foreach (var item in stores)
-            {
-                history.AddRange(Context.StorePointsHistory.Include(o => o.StorePoints.Store).Include(o => o.StorePoints.User).Where(o => o.StorePoints.Store == item).ToList());
-            }
-
-            List<StorePointsHistory> userHistory = Context.StorePointsHistory.Include(o => o.StorePoints.Store).Include(o => o.StorePoints.User).Where(o => o.StorePoints.User == user).ToList();
-            foreach (var item in userHistory)
-            {
-                // check for duplicas
-                var found = history.FirstOrDefault(o => o.Id == item.Id);
-                if (found == null)
-                {
-                    history.Add(item);
-                }
-            }
-
-            StorePointsDto dto = new StorePointsDto { StorePoints = points , StorePointsHistory = history};
+            PointsDto dto = new PointsDto { StorePoints = points , StorePointsHistory = history};
 
             return View(dto);
         }
@@ -51,11 +39,9 @@ namespace WebApp.Controllers
         public IActionResult AddPoints(int postId, int storeId, int userId) {
             // this user should be the admin of the store
             User user = GetUser();
-            
-            //User to add the points
-            User clientUser = Context.User.FirstOrDefault(o => o.Id == userId);
-
             Store store = Context.Store.FirstOrDefault(o => o.Id == storeId);
+
+            // chack if the store is owned by the user who call the endpoint
             if (store.User != user)
             {
                 return RedirectToAction("Index");
@@ -63,32 +49,11 @@ namespace WebApp.Controllers
 
             Post post = Context.Post.FirstOrDefault(o => o.Id == postId);
 
-            // load points or create new register and add the points
-            StorePoints storePoints = Context.StorePoints.FirstOrDefault(o => o.User == clientUser);
-            if (storePoints == null)
-            {
-                storePoints = new StorePoints() { User = clientUser, CreateTime = DateTime.Now, Store = store};
-            }
+            //User to add the points
+            User clientUser = Context.User.FirstOrDefault(o => o.Id == userId);
 
-            storePoints.Points += post.Points;
-            storePoints.UpdateTime = DateTime.Now;
-
-            if (storePoints.Id == 0)
-            {
-                Context.Add(storePoints);
-                Context.SaveChanges();
-
-            }
-            else
-            {
-                Context.Update(storePoints);
-                Context.SaveChanges();
-            }
-
-            // should implement store points history and redirect the store owner there.
-            StorePointsHistory history = new StorePointsHistory { StorePoints = storePoints, Points = post.Points, Operation = "afegits", CreateTime = DateTime.Now };
-            Context.Add(history);
-            Context.SaveChanges();
+            StorePoints storePoints = StorePointsService.CreateStorePoints(clientUser, store, post);
+            StorePointsHistoryService.SaveStorePointsHistory(storePoints, post);
 
             return RedirectToAction("Index");
         }

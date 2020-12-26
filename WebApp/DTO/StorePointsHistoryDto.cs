@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace WebApp.DTO
 {
-    public class StorePointsDto
+    public class StorePointsHistoryDto
     {
         public int Id { get; set; }
-        public StoreDto Store { get; set; }
-        public UserDto User { get; set; }
+        public string Operation { get; set; }
         public int Points { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public StorePointsDto StorePoints { get; set; }
         public DateTime CreateTime { get; set; }
     }
 }
