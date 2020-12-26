@@ -41,7 +41,7 @@ namespace WebApp.Service
 
             foreach (var item in history)
             {
-                StorePointsHistoryMapper.StorePointsHistoryToDto(item);
+                dtos.Add(StorePointsHistoryMapper.StorePointsHistoryToDto(item));
             }
             return dtos;
         }
