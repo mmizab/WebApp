@@ -86,7 +86,7 @@ namespace WebApp.Controllers
             }
 
             // should implement store points history and redirect the store owner there.
-            StorePointsHistory history = new StorePointsHistory { StorePoints = storePoints, Points = post.Points, Operation = "add", CreateTime = DateTime.Now };
+            StorePointsHistory history = new StorePointsHistory { StorePoints = storePoints, Points = post.Points, Operation = "afegits", CreateTime = DateTime.Now };
             Context.Add(history);
             Context.SaveChanges();
 
