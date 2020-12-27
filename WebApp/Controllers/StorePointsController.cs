@@ -36,23 +36,23 @@ namespace WebApp.Controllers
         }
 
         [Route("/addpoints")]
-        public IActionResult AddPoints(int postId, int storeId, int userId) {
+        public IActionResult AddPoints(int postId, int userId) {
             // this user should be the admin of the store
             User user = GetUser();
-            Store store = Context.Store.FirstOrDefault(o => o.Id == storeId);
+            
+            Post post = Context.Post.Include(o => o.Store).FirstOrDefault(o => o.Id == postId);
 
             // chack if the store is owned by the user who call the endpoint
-            if (store.User != user)
+            if (post.Store.User != user)
             {
                 return RedirectToAction("Index");
             }
 
-            Post post = Context.Post.FirstOrDefault(o => o.Id == postId);
 
             //User to add the points
             User clientUser = Context.User.FirstOrDefault(o => o.Id == userId);
 
-            StorePoints storePoints = StorePointsService.CreateStorePoints(clientUser, store, post);
+            StorePoints storePoints = StorePointsService.CreateStorePoints(clientUser, post.Store, post);
             StorePointsHistoryService.SaveStorePointsHistory(storePoints, post);
 
             return RedirectToAction("Index");
