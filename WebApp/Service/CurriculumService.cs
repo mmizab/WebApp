@@ -24,12 +24,20 @@ namespace WebApp.Service
         }
 
         public void SaveCurriculum(CurriculumDto dto, User user) {
-            Curriculum c = new Curriculum { Experiencia = dto.Experiencia, User = user, Formacion = dto.Formacion, InfoAdicional = dto.InfoAdicional };
-            Context.Add(c);
-            Context.SaveChanges();
-            if (c.Id == 0)
+            Curriculum curriculum = Context.Curriculum.FirstOrDefault(o => o.User == user);
+            if (curriculum == null)
             {
-                throw new Exception("Error saving Curriculum");
+                curriculum = new Curriculum { Experiencia = dto.Experiencia, User = user, Formacion = dto.Formacion, InfoAdicional = dto.InfoAdicional };
+                Context.Add(curriculum);
+                Context.SaveChanges();
+            }
+            else
+            {
+                curriculum.Formacion = dto.Formacion;
+                curriculum.InfoAdicional = dto.InfoAdicional;
+                curriculum.Experiencia = dto.Experiencia;
+                Context.Update(curriculum);
+                Context.SaveChanges();
             }
         }
     }
