@@ -1,6 +1,6 @@
 # Setup
 ### 1 - Craete Database With Docker
-docker run --name mariadb -v mariadb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1 -d mariadb:latest --restart always 
+docker run --name mariadb --restart always -v mariadb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1 -d mariadb:latest 
 
 
 Also you have to create the database named **webapp**

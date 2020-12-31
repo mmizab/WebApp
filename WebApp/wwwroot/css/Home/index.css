@@ -47,6 +47,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     padding: 1%;
+    width: 100%;
 }
 
 .box-product-image {
