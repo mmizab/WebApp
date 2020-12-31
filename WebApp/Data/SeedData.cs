@@ -27,8 +27,8 @@ namespace WebApp.Data
             }
 
             List<User> users = new List<User>();
-            users.Add(new User { Email = "admin", Password = "1" , Role = "admin"});
-            users.Add(new User { Email = "test", Password = "1", Role = "client"});
+            users.Add(new User { Email = "admin", Password = "1" , Role = "admin", Name = "admin"});
+            users.Add(new User { Email = "test", Password = "1", Role = "client", Name = "test"});
 
             context.AddRange(users);
             context.SaveChanges();
